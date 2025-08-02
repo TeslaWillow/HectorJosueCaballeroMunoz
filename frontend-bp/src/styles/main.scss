@@ -1,12 +1,15 @@
+
+
 // Import base styles
 @use 'base/reset';
 @use 'base/variables' as *;
 @use 'themes/themes' as *;
+// Import animations
+@use 'animations/keyframes' as *;
+// Import typography
 @use 'base/typografy';
 @use 'base/text';
 @use 'base/body';
-
-// Import themes
 
 // Import components
 @use 'components/buttons';
@@ -15,6 +18,7 @@
 @use 'components/input';
 @use 'components/modal';
 @use 'components/table';
+@use 'components/dropdown';
 
 // Import utilities
 @use 'utilities/utilities';

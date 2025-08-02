@@ -1,0 +1,17 @@
+<div class="dropdown-container">
+  <shared-ui-button
+    [variant]="buttonVariant()"
+    (click)="toggleDropdown()"
+    class="dropdown-button"
+  >
+    {{ buttonText() }}
+    <span class="dropdown-icon">▼</span>
+  </shared-ui-button>
+
+  @if (isDropdownOpen()) {
+    <div class="dropdown-menu">
+      <ng-content (itemClicked)="handleItemClick(item.label())"></ng-content>
+    </div>
+  }
+
+</div>

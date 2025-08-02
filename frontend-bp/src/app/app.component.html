@@ -56,8 +56,11 @@
         [config]="tableConfig()"
       >
         <ng-template #actions let-row>
-          <button class="button button--primary">Editar</button>
-          <button class="button button--primary">Eliminar</button>
+          <shared-component-dropdown [buttonText]="'Opciones'">
+            <shared-component-dropdown-item label="Ver" icon="👁️" (itemClick)="handleAction('view', row)"></shared-component-dropdown-item>
+            <shared-component-dropdown-item label="Editar" icon="✏️" (itemClick)="handleAction('edit', row)"></shared-component-dropdown-item>
+            <shared-component-dropdown-item label="Eliminar" icon="🗑️" (itemClick)="handleAction('delete', row)"></shared-component-dropdown-item>
+          </shared-component-dropdown>
         </ng-template>
       </shared-ui-table>
     </div>

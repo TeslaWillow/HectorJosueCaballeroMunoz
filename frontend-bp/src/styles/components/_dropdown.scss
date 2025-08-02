@@ -1,0 +1,70 @@
+@use "../../styles/base/variables" as *;
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-button {
+  display: flex;
+  align-items: center;
+  gap: $spacing-unit;
+}
+
+.dropdown-icon {
+  font-size: 0.8em;
+  transition: transform 0.2s;
+  .dropdown-container.open & {
+    transform: rotate(180deg);
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  z-index: 1000;
+  min-width: 160px;
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  margin-top: $spacing-unit;
+  overflow: hidden;
+
+  /* Animation */
+  animation: fadeIn ease-out .3s;
+}
+
+// Dropdown items
+.dropdown-item {
+  width: 100%;
+  padding: ($spacing-unit * 1.5) ($spacing-unit * 2);
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: $spacing-unit;
+  color: var(--text-color);
+  transition: all ease .3s;
+
+  &:hover {
+    background-color: var(--background);
+    color: var(--text-color);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+  }
+
+  &.danger {
+    color: var(--error-color);
+  }
+}
+
+.item-icon {
+  font-size: 1.2em;
+}
