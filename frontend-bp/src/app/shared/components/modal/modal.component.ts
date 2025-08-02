@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, input, output, EventEmitter, inject } from '@angular/core';
 
 @Component({
-  selector: 'ui-modal',
+  selector: 'shared-component-modal',
   standalone: true,
   templateUrl: './modal.component.html',
   styleUrls: [],
