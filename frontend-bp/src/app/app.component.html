@@ -47,27 +47,19 @@
     <div class="mb-5">
       <h3>TABLE</h3>
       <hr>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Header 1</th>
-            <th>Header 2</th>
-            <th>Header 3</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Row 1, Cell 1</td>
-            <td>Row 1, Cell 2</td>
-            <td>Row 1, Cell 3</td>
-          </tr>
-          <tr>
-            <td>Row 2, Cell 1</td>
-            <td>Row 2, Cell 2</td>
-            <td>Row 2, Cell 3</td>
-          </tr>
-        </tbody>
-      </table>
+      <shared-ui-table
+        [data]="[
+          { id: 1, name: 'John Doe', age: 30 },
+          { id: 2, name: 'Jane Smith', age: 25 },
+          { id: 3, name: 'Alice Johnson', age: 28 }
+        ]"
+        [config]="tableConfig()"
+      >
+        <ng-template #actions let-row>
+          <button class="button button--primary">Editar</button>
+          <button class="button button--primary">Eliminar</button>
+        </ng-template>
+      </shared-ui-table>
     </div>
 
     <div class="mb-5">

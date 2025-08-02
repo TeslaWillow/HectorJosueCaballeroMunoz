@@ -1,0 +1,54 @@
+<div class="table-container">
+  <table class="table">
+    @if (config().showHeader !== false) {
+      <thead>
+        <tr>
+          @for (column of config().columns; track column.key) {
+            <th
+              [style.width]="column.width || 'auto'"
+              [class.sortable]="column.sortable"
+              (click)="handleSort(column)"
+            >
+              {{ column.label }}
+              @if (column.sortable && sortedColumn() === column.key) {
+                <span class="sort-icon">
+                  {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+                </span>
+              }
+            </th>
+          }
+          <!-- Actions column if actionsTemplate is provided -->
+          @if (actionsTemplate) {
+            <th class="actions-header"></th>
+          }
+        </tr>
+      </thead>
+    }
+    <tbody>
+      @for (row of data(); track $index) {
+        <tr
+          [class.striped]="config().striped"
+          [class.hoverable]="config().hoverable"
+          (click)="rowClicked.emit(row)"
+        >
+          @for (column of config().columns; track column.key) {
+            <td>{{ row[column.key] }}</td>
+          }
+
+          <!-- Actions if actionsTemplate is provided -->
+          @if (actionsTemplate) {
+            <td class="actions-cell" (click)="$event.stopPropagation()">
+              <ng-container
+                [ngTemplateOutlet]="actionsTemplate"
+                [ngTemplateOutletContext]="{ $implicit: row }"
+              ></ng-container>
+            </td>
+          }
+        </tr>
+      }
+      @empty {
+        No data available
+      }
+    </tbody>
+  </table>
+</div>
