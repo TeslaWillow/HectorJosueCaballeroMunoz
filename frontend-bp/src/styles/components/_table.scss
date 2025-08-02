@@ -1,0 +1,39 @@
+@use '../base/variables' as *;
+
+.table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  width: 100%;
+
+  thead {
+    tr {
+      background-color: var(--secondary-color);
+      border-bottom: 2px solid var(--text-color);
+      color: var(--text-color);
+      text-align: left;
+    }
+  }
+
+  th,
+  td {
+    padding: 12px 15px;
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid var(--text-color);
+
+      &:nth-of-type(odd),
+      &:nth-of-type(even) {
+        background-color: var(--card-color);
+      }
+
+      &:last-of-type {
+        border-bottom: 2px solid var(--text-color);
+      }
+    }
+  }
+}
