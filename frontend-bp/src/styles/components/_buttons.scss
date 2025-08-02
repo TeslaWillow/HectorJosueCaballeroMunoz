@@ -4,7 +4,8 @@
   border: none;
   border-radius: $border-radius;
   transition: all 0.3s ease;
-  padding: ($spacing-unit * 1.2) ($spacing-unit * 3);
+  padding: 0 ($spacing-unit * 3);
+  height: ($spacing-unit * 6);
   outline: 2px solid transparent;
   outline-offset: 2px;
   cursor: pointer;

@@ -1,0 +1,14 @@
+@use "../base/variables" as *;
+
+$breakpoints: (
+  xxs: $breakpoint-xxs,
+  xs:  $breakpoint-xs,
+  sm:  $breakpoint-sm,
+  md:  $breakpoint-md,
+  lg:  $breakpoint-lg,
+  xl:  $breakpoint-xl,
+  xxl: $breakpoint-xxl
+) !default;
+
+// Spacing variables
+$grid-columns: 12 !default;

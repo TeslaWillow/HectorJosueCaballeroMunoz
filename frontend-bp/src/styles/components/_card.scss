@@ -6,7 +6,6 @@
   background-color: var(--card-color);
   border-radius: $border-radius;
   padding: ($spacing-unit * 2);
-  margin: ($spacing-unit * 1);
 
   // usage: <div class="card__header">...</div>
   &__header {

@@ -1,0 +1,79 @@
+@use '../base/variables' as *;
+// Grid system variables
+@use '../layouts/variables' as *;
+
+// Container
+.container {
+  width: 100%;
+  padding-right: $spacing-unit;
+  padding-left: $spacing-unit;
+  margin-right: auto;
+  margin-left: auto;
+
+  @each $breakpoint, $size in $breakpoints {
+    @if $size > 0 {
+      @media (min-width: $size) {
+        max-width: $size;
+      }
+    }
+  }
+}
+
+// Row
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -$spacing-unit;
+  margin-left: -$spacing-unit;
+}
+
+// Columns
+[class^="col-"] {
+  position: relative;
+  width: 100%;
+  padding-right: $spacing-unit;
+  padding-left: $spacing-unit;
+}
+
+// Breakpoint mixin
+@mixin make-columns($columns: $grid-columns, $breakpoint: null) {
+  @for $i from 1 through $columns {
+    .col#{$breakpoint}-#{$i} {
+      flex: 0 0 percentage($i / $columns);
+      max-width: percentage($i / $columns);
+    }
+  }
+}
+
+// Responsive columns
+@each $breakpoint, $size in $breakpoints {
+  @if $size == 0 {
+    // Mobile-first columns
+    @include make-columns;
+  } @else {
+    // Other breakpoints
+    @media (min-width: $size) {
+      @include make-columns($breakpoint: -#{$breakpoint});
+    }
+  }
+}
+
+// Offset
+@mixin make-offsets($columns: $grid-columns, $breakpoint: null) {
+  @for $i from 0 through ($columns - 1) {
+    .offset#{$breakpoint}-#{$i} {
+      margin-left: percentage($i / $columns);
+    }
+  }
+}
+
+// Offsets responsive
+@each $breakpoint, $size in $breakpoints {
+  @if $size == 0 {
+    @include make-offsets;
+  } @else {
+    @media (min-width: $size) {
+      @include make-offsets($breakpoint: -#{$breakpoint});
+    }
+  }
+}

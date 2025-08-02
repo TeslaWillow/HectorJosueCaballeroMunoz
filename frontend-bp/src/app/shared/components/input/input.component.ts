@@ -1,6 +1,6 @@
 import {
-  Component, Input, forwardRef, booleanAttribute,
-  ChangeDetectorRef, inject, signal, input, model
+  Component, forwardRef, booleanAttribute,
+  ChangeDetectorRef, inject, input, model
 } from '@angular/core';
 import {
   NG_VALUE_ACCESSOR, NG_VALIDATORS,
@@ -36,7 +36,7 @@ export class InputComponent implements ControlValueAccessor, Validator {
 
   // Inputs
   public id = input<string>('');
-  public type = input<'text' | 'number' | 'email' | 'password' | 'date' | 'textarea'>('text');
+  public type = input<'text' | 'number' | 'email' | 'password' | 'date' | 'search' | 'textarea'>('text');
   public placeholder = input<string>('');
   public label = input<string>('');
   public errorMessage = input<string>('');

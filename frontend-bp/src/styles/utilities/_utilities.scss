@@ -62,6 +62,11 @@
 .flex-content-center { justify-content: center; }
 .flex-content-between { justify-content: space-between; }
 .flex-content-around { justify-content: space-around; }
+// Align items
+.align-items-stretch { align-items: stretch; }
+.align-items-start { align-items: flex-start; }
+.align-items-center { align-items: center; }
+.align-items-end { align-items: flex-end; }
 
 // Width and height utilities
 .w-100 { width: 100%; }

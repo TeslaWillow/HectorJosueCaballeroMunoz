@@ -20,6 +20,10 @@
 @use 'components/table';
 @use 'components/dropdown';
 
+// Import layouts
+@use 'layouts/variables' as *;
+@use 'layouts/grid' as *;
+
 // Import utilities
 @use 'utilities/utilities';
 
