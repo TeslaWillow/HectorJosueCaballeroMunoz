@@ -30,18 +30,39 @@
     <div class="mb-5">
       <h3>INPUTS</h3>
       <hr>
-      <div class="flex flex-column">
-        <div class="mb-1">
-          <label class="form-label" for="first_input">Primer input</label>
-          <input id="first_input" type="text" class="input input--invalid" placeholder="Primary Input">
-          <small class="text-danger">Ha ocurrido un error</small>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <shared-component-input
+            formControlName="email"
+            type="email"
+            label="Correo Electrónico"
+            placeholder="ejemplo@mail.com"
+            [required]="true"
+            [errorMessage]="form.get('email')?.errors ? 'Email inválido' : ''"
+          ></shared-component-input>
         </div>
-        <input type="number" class="input mb-1" placeholder="Secondary Input">
-        <input type="email" class="input mb-1" placeholder="Email Input">
-        <input type="password" class="input mb-1" placeholder="Password Input">
-        <input type="date" class="input mb-1" placeholder="Date Input">
-        <textarea class="input mb-1" placeholder="Lorem impum dolore"></textarea>
-      </div>
+
+        <div class="mb-3">
+          <shared-component-input
+            formControlName="password"
+            type="password"
+            label="Contraseña"
+            placeholder="Mínimo 6 caracteres"
+            [errorMessage]="form.get('password')?.errors ? 'Contraseña muy corta' : ''"
+          ></shared-component-input>
+        </div>
+
+        <div class="mb-3">
+          <shared-component-input
+            formControlName="description"
+            type="textarea"
+            label="Descripción"
+            placeholder="Escribe algo..."
+          ></shared-component-input>
+        </div>
+
+        <shared-ui-button [type]="'submit'"><span>Submit</span></shared-ui-button>
+      </form>
     </div>
 
     <div class="mb-5">

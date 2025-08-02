@@ -14,7 +14,6 @@ export class ButtonComponent {
   public readonly click    = output<Event>();
 
   public handleClick(event: Event): void {
-    event.preventDefault();
     event.stopPropagation();
     // If the button is disabled or loading, do not emit the clicked event
     if (this.disabled() || this.loading()) return;
