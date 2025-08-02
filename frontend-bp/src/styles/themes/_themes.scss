@@ -1,16 +1,18 @@
-@use '../base/variables' as *;
-
 :root {
   /* Light Theme Default */
-  --background: $white-color;
+  --background: #F4F6F9;
+  --card-color: #FFFFFF;
   --text-color: #333333;
   --primary-color: #F5DF66;
   --secondary-color: #EAECF2;
+  --danger-color: #FF4D4F;
 }
 
 [data-theme="dark"] {
   --background: #121212;
+  --card-color: #474747;
   --text-color: #f5f5f5;
   --primary-color: #7367F5;
   --secondary-color: #3b3b3b;
+  --danger-color: #FF4D4F;
 }

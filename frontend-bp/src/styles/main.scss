@@ -3,6 +3,7 @@
 @use 'base/variables' as *;
 @use 'themes/themes' as *;
 @use 'base/typografy';
+@use 'base/text';
 @use 'base/body';
 
 // Import themes
@@ -11,6 +12,7 @@
 @use 'components/buttons';
 @use 'components/card';
 @use 'components/container';
+@use 'components/input';
 
 // Import utilities
 @use 'utilities/utilities';

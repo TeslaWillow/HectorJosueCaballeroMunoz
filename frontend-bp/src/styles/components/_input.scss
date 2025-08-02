@@ -1,0 +1,48 @@
+@use '../base/variables' as *;
+
+textarea {
+  max-width: 100%;
+  min-width: 100%;
+  width: 100%;
+}
+
+.input {
+  background-color: $white-color;
+  border-radius: $border-radius;
+  border: 2px solid darken($color: $white-color, $amount: 75%);
+  color: $black-color;
+  height: 45px;
+  line-height: 30px;
+  outline: none;
+  padding: 0 ($spacing-unit * 2);
+  transition: .5s ease;
+  width: 100%;
+  &--icon {
+    padding-left: 3rem;
+  }
+  &--invalid {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+    &:focus,
+    &:hover {
+      border-color: var(--danger-color) !important;
+      outline: none;
+    }
+  }
+  &::placeholder {
+    color: #94a3b8 !important;
+  }
+  &:focus,
+  &:hover {
+    border-color: var(--primary-color);
+    outline: none;
+  }
+}
+
+.icon {
+  fill: none;
+  height: 1rem;
+  left: 1rem;
+  position: absolute;
+  width: 1rem;
+}

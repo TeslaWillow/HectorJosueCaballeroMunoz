@@ -1,7 +1,50 @@
-<div class="container">
-  <h1>Hello World</h1>
+<main>
+  <div class="container card mt-5">
+    <h1>COMPONENTS</h1>
+    <h2>WELCOME TO MY SITE</h2>
 
-  <button class="button button--primary">Button test</button>
-  <button class="button button--secondary ml-1" (click)="toggleTheme();">Toggle theme</button>
+    <div class="mb-5">
+      <h3>BUTTONS</h3>
+      <hr>
+      <button class="button button--primary">Button test</button>
+      <button class="button button--secondary ml-1" (click)="toggleTheme();">Toggle theme</button>
+    </div>
 
-</div>
+    <div class="mb-5">
+      <h3>TEXT</h3>
+      <hr>
+      <p class="text-center">This is a centered text.</p>
+      <p class="text-right">This is a right-aligned text.</p>
+      <p class="text-left">This is a left-aligned text.</p>
+      <p class="text-justify">This is a justified text.</p>
+      <p class="text-uppercase">This is an uppercase text.</p>
+      <p class="text-lowercase">This is a lowercase text.</p>
+      <p class="text-capitalize">This is a capitalized text.</p>
+      <p class="text-bold">This is a bold text.</p>
+      <p class="text-italic">This is an italic text.</p>
+      <p class="text-underline">This is an underlined text.</p>
+      <p class="text-strike">This is a strikethrough text
+    </div>
+
+    <div class="mb-5">
+      <h3>INPUTS</h3>
+      <hr>
+      <div class="flex flex-column">
+        <div class="mb-1">
+          <label class="form-label" for="first_input">Primer input</label>
+          <input id="first_input" type="text" class="input input--invalid" placeholder="Primary Input">
+          <small class="text-danger">Ha ocurrido un error</small>
+        </div>
+        <input type="number" class="input mb-1" placeholder="Secondary Input">
+        <input type="email" class="input mb-1" placeholder="Email Input">
+        <input type="password" class="input mb-1" placeholder="Password Input">
+        <input type="search" class="input mb-1" placeholder="Search Input">
+        <input type="date" class="input mb-1" placeholder="Date Input">
+        <input type="color" class="input mb-1" placeholder="Color Input">
+        <input type="file" class="input mb-1" placeholder="File Input">
+        <textarea class="input mb-1" placeholder="Lorem impum dolore"></textarea>
+      </div>
+    </div>
+
+  </div>
+</main>

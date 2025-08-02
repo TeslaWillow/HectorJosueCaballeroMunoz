@@ -3,7 +3,7 @@
 // Card component styles
 // usage: <div class="card">...</div>
 .card {
-  background-color: $white-color;
+  background-color: var(--card-color);
   border-radius: $border-radius;
   padding: ($spacing-unit * 2);
   margin: ($spacing-unit * 1);
