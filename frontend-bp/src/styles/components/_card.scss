@@ -1,0 +1,27 @@
+@use '../base/variables' as *;
+
+// Card component styles
+// usage: <div class="card">...</div>
+.card {
+  background-color: $white-color;
+  border-radius: $border-radius;
+  padding: ($spacing-unit * 2);
+  margin: ($spacing-unit * 1);
+
+  // usage: <div class="card__header">...</div>
+  &__header {
+    font-size: $font-size-lg;
+    font-weight: bold;
+    margin-bottom: ($spacing-unit * 1);
+  }
+
+  &__body {
+    font-size: $font-size-md;
+    color: var(--text-color);
+  }
+
+  &__footer {
+    text-align: right;
+    margin-top: ($spacing-unit * 1);
+  }
+}

@@ -8,5 +8,13 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'frontend-bp';
+  public title: string = 'frontend-bp';
+
+  public isDarkMode: boolean = false;
+
+  public toggleTheme(): void {
+    this.isDarkMode = !this.isDarkMode;
+    document.body.setAttribute('data-theme', this.isDarkMode ? 'dark' : 'light');
+  }
+
 }

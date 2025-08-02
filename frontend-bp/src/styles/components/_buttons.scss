@@ -1,0 +1,34 @@
+@use '../base/variables' as *;
+
+.button {
+  border: none;
+  border-radius: $border-radius;
+  transition: all 0.3s ease;
+  padding: ($spacing-unit * 1.2) ($spacing-unit * 3);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  cursor: pointer;
+  // usage: <button class="button button--primary">...</button>
+  &--primary {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    &:hover {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+    &:focus {
+      opacity: 0.9;
+    }
+  }
+  &--secondary {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    &:hover {
+      outline: 2px solid var(--secondary-color);
+      outline-offset: 2px;
+    }
+    &:focus {
+      opacity: 0.9;
+    }
+  }
+}

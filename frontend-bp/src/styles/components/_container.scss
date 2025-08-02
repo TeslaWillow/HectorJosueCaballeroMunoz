@@ -1,0 +1,11 @@
+@use '../base/variables' as *;
+
+.container--fluid {
+  width: 100%;
+  margin: 0 $spacing-unit;
+}
+
+.container {
+  max-width: $container-max-width;
+  margin: 0 auto;
+}

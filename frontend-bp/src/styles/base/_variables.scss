@@ -1,0 +1,39 @@
+// UNIT SYSTEM: 4px = 1 unit
+
+// Colors
+$white-color: #FFFFFF;
+$black-color: #000000;
+
+// Spacing
+$spacing-unit: 8px;
+
+// Container max width
+$container-max-width: 1200px;
+
+// Breakpoints
+$breakpoint-xxs: 320px;
+$breakpoint-xs:  480px;
+$breakpoint-sm:  576px;
+$breakpoint-md:  768px;
+$breakpoint-lg:  992px;
+$breakpoint-xl:  1200px;
+$breakpoint-xxl: 1400px;
+
+// Border radius
+$border-radius: 4px;
+
+// Font sizes
+$font-size-sm:  12px;
+$font-size:     16px;
+$font-size-md:  20px;
+$font-size-lg:  24px;
+$font-size-xl:  32px;
+$font-size-xxl: 40px;
+
+// Breakpoint mixin
+// Usage: @include respond-to($breakpoint-md) { ... }
+@mixin respond-to($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}

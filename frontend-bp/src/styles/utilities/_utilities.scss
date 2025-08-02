@@ -1,0 +1,53 @@
+@use '../base/variables' as *;
+
+// Spacing utilities (margin)
+// Generates margin classes for 0 to 5 spacing units
+// Usage: .mt-1, .mb-2, etc.
+@for $i from 0 through 5 {
+  .mt-#{$i} { margin-top: if($i == 0, 0, $spacing-unit * $i); }
+  .mb-#{$i} { margin-bottom: if($i == 0, 0, $spacing-unit * $i); }
+  .ml-#{$i} { margin-left: if($i == 0, 0, $spacing-unit * $i); }
+  .mr-#{$i} { margin-right: if($i == 0, 0, $spacing-unit * $i); }
+  .mx-#{$i} { padding-left: if($i == 0, 0, $spacing-unit * $i); padding-right: if($i == 0, 0, $spacing-unit * $i); }
+  .my-#{$i} { padding-top: if($i == 0, 0, $spacing-unit * $i); padding-bottom: if($i == 0, 0, $spacing-unit * $i); }
+  .m-#{$i}  { margin: if($i == 0, 0, $spacing-unit * $i); }
+}
+.m-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Padding utilities (padding)
+// Generates padding classes for 0 to 5 spacing units
+@for $i from 0 through 5 {
+  .pt-#{$i} { padding-top: if($i == 0, 0, $spacing-unit * $i); }
+  .pb-#{$i} { padding-bottom: if($i == 0, 0, $spacing-unit * $i); }
+  .pl-#{$i} { padding-left: if($i == 0, 0, $spacing-unit * $i); }
+  .pr-#{$i} { padding-right: if($i == 0, 0, $spacing-unit * $i); }
+  .px-#{$i} { padding-left: if($i == 0, 0, $spacing-unit * $i); padding-right: if($i == 0, 0, $spacing-unit * $i); }
+  .py-#{$i} { padding-top: if($i == 0, 0, $spacing-unit * $i); padding-bottom: if($i == 0, 0, $spacing-unit * $i); }
+  .p-#{$i}  { padding: if($i == 0, 0, $spacing-unit * $i); }
+}
+.p-auto {
+  padding-left: auto;
+  padding-right: auto;
+}
+
+// Text utilities
+// Usage: .text-left, .text-center, etc.
+.text-left { text-align: left; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-justify { text-align: justify; }
+
+// Flex
+// Usage: .flex, .flex .flex-column, .flex .flex-row .flex-center, etc.
+.flex { display: flex; }
+.flex-column { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-start { justify-content: flex-start; align-items: flex-start; }
+.flex-end { justify-content: flex-end; align-items: flex-end; }
+.flex-center { justify-content: center; align-items: center; }
+.flex-between { justify-content: space-between; align-items: center; }
+.flex-around { justify-content: space-around; align-items: center; }
