@@ -1,144 +1,144 @@
 <div class="container mt-5">
-    <shared-ui-card>
-      <h1>COMPONENTS</h1>
-      <h2>WELCOME TO MY SITE</h2>
+  <shared-ui-card>
+    <h1>COMPONENTS</h1>
+    <h2>WELCOME TO MY SITE</h2>
 
-      <div class="mb-5">
-        <h3>BUTTONS</h3>
-        <hr />
-        <shared-ui-button><span>Primary Button</span></shared-ui-button>
-        <shared-ui-button class="ml-1" [variant]="'secondary'"
-          ><span>Secondary Button</span></shared-ui-button
+    <div class="mb-5">
+      <h3>BUTTONS</h3>
+      <hr />
+      <shared-ui-button><span>Primary Button</span></shared-ui-button>
+      <shared-ui-button class="ml-1" [variant]="'secondary'"
+        ><span>Secondary Button</span></shared-ui-button
+      >
+      <shared-ui-button
+        class="ml-1"
+        [variant]="'secondary'"
+        (click)="toggleTheme()"
+        ><span>Secondary Button</span></shared-ui-button
+      >
+    </div>
+
+    <div class="mb-5">
+      <h3>TEXT</h3>
+      <hr />
+      <p class="text-center">This is a centered text.</p>
+      <p class="text-right">This is a right-aligned text.</p>
+      <p class="text-left">This is a left-aligned text.</p>
+      <p class="text-justify">This is a justified text.</p>
+      <p class="text-uppercase">This is an uppercase text.</p>
+      <p class="text-lowercase">This is a lowercase text.</p>
+      <p class="text-capitalize">This is a capitalized text.</p>
+      <p class="text-bold">This is a bold text.</p>
+      <p class="text-italic">This is an italic text.</p>
+      <p class="text-underline">This is an underlined text.</p>
+      <p class="text-strike">This is a strikethrough text</p>
+    </div>
+
+    <div class="mb-5">
+      <h3>INPUTS</h3>
+      <hr />
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <shared-component-input
+            formControlName="email"
+            type="email"
+            label="Correo Electrónico"
+            placeholder="ejemplo@mail.com"
+            [required]="true"
+            [errorMessage]="form.get('email')?.errors ? 'Email inválido' : ''"
+          ></shared-component-input>
+        </div>
+
+        <div class="mb-3">
+          <shared-component-input
+            formControlName="password"
+            type="password"
+            label="Contraseña"
+            placeholder="Mínimo 6 caracteres"
+            [errorMessage]="
+              form.get('password')?.errors ? 'Contraseña muy corta' : ''
+            "
+          ></shared-component-input>
+        </div>
+
+        <div class="mb-3">
+          <shared-component-input
+            formControlName="description"
+            type="textarea"
+            label="Descripción"
+            placeholder="Escribe algo..."
+          ></shared-component-input>
+        </div>
+
+        <shared-ui-button [type]="'submit'"
+          ><span>Submit</span></shared-ui-button
         >
-        <shared-ui-button
-          class="ml-1"
-          [variant]="'secondary'"
-          (click)="toggleTheme()"
-          ><span>Secondary Button</span></shared-ui-button
-        >
-      </div>
+      </form>
+    </div>
 
-      <div class="mb-5">
-        <h3>TEXT</h3>
-        <hr />
-        <p class="text-center">This is a centered text.</p>
-        <p class="text-right">This is a right-aligned text.</p>
-        <p class="text-left">This is a left-aligned text.</p>
-        <p class="text-justify">This is a justified text.</p>
-        <p class="text-uppercase">This is an uppercase text.</p>
-        <p class="text-lowercase">This is a lowercase text.</p>
-        <p class="text-capitalize">This is a capitalized text.</p>
-        <p class="text-bold">This is a bold text.</p>
-        <p class="text-italic">This is an italic text.</p>
-        <p class="text-underline">This is an underlined text.</p>
-        <p class="text-strike">This is a strikethrough text</p>
-      </div>
+    <div class="mb-5">
+      <h3>TABLE</h3>
+      <hr />
+      <shared-ui-table
+        [data]="[
+          { id: 1, name: 'John Doe', age: 30 },
+          { id: 2, name: 'Jane Smith', age: 25 },
+          { id: 3, name: 'Alice Johnson', age: 28 }
+        ]"
+        [config]="tableConfig()"
+      >
+        <ng-template #actions let-row>
+          <shared-component-dropdown [buttonText]="'Opciones'">
+            <shared-component-dropdown-item
+              label="Ver"
+              icon="👁️"
+              (itemClick)="handleAction('view', row)"
+            ></shared-component-dropdown-item>
+            <shared-component-dropdown-item
+              label="Editar"
+              icon="✏️"
+              (itemClick)="handleAction('edit', row)"
+            ></shared-component-dropdown-item>
+            <shared-component-dropdown-item
+              label="Eliminar"
+              icon="🗑️"
+              (itemClick)="handleAction('delete', row)"
+            ></shared-component-dropdown-item>
+          </shared-component-dropdown>
+        </ng-template>
+      </shared-ui-table>
+    </div>
 
-      <div class="mb-5">
-        <h3>INPUTS</h3>
-        <hr />
-        <form [formGroup]="form" (ngSubmit)="onSubmit()">
-          <div class="mb-3">
-            <shared-component-input
-              formControlName="email"
-              type="email"
-              label="Correo Electrónico"
-              placeholder="ejemplo@mail.com"
-              [required]="true"
-              [errorMessage]="form.get('email')?.errors ? 'Email inválido' : ''"
-            ></shared-component-input>
-          </div>
+    <div class="mb-5">
+      <h3>MODAL</h3>
+      <hr />
 
-          <div class="mb-3">
-            <shared-component-input
-              formControlName="password"
-              type="password"
-              label="Contraseña"
-              placeholder="Mínimo 6 caracteres"
-              [errorMessage]="
-                form.get('password')?.errors ? 'Contraseña muy corta' : ''
-              "
-            ></shared-component-input>
-          </div>
+      <button class="button button--primary" (click)="openModal()">
+        Open modal
+      </button>
 
-          <div class="mb-3">
-            <shared-component-input
-              formControlName="description"
-              type="textarea"
-              label="Descripción"
-              placeholder="Escribe algo..."
-            ></shared-component-input>
-          </div>
-
-          <shared-ui-button [type]="'submit'"
-            ><span>Submit</span></shared-ui-button
-          >
-        </form>
-      </div>
-
-      <div class="mb-5">
-        <h3>TABLE</h3>
-        <hr />
-        <shared-ui-table
-          [data]="[
-            { id: 1, name: 'John Doe', age: 30 },
-            { id: 2, name: 'Jane Smith', age: 25 },
-            { id: 3, name: 'Alice Johnson', age: 28 }
-          ]"
-          [config]="tableConfig()"
-        >
-          <ng-template #actions let-row>
-            <shared-component-dropdown [buttonText]="'Opciones'">
-              <shared-component-dropdown-item
-                label="Ver"
-                icon="👁️"
-                (itemClick)="handleAction('view', row)"
-              ></shared-component-dropdown-item>
-              <shared-component-dropdown-item
-                label="Editar"
-                icon="✏️"
-                (itemClick)="handleAction('edit', row)"
-              ></shared-component-dropdown-item>
-              <shared-component-dropdown-item
-                label="Eliminar"
-                icon="🗑️"
-                (itemClick)="handleAction('delete', row)"
-              ></shared-component-dropdown-item>
-            </shared-component-dropdown>
-          </ng-template>
-        </shared-ui-table>
-      </div>
-
-      <div class="mb-5">
-        <h3>MODAL</h3>
-        <hr />
-
-        <button class="button button--primary" (click)="openModal()">
-          Open modal
-        </button>
-
-        <shared-component-modal
-          [title]="'Modal Title'"
-          [size]="'medium'"
-          [showFooter]="true"
-          [isOpen]="modalIsOpen()"
-          (closed)="onModalClosed()"
-        >
-          <p>This is the content of the modal.</p>
-          <div footer>
-            <div class="w-100 flex flex-row flex-content-between">
-              <div><button class="button button--primary">Botón</button></div>
-              <div>
-                <button
-                  class="button button--secondary"
-                  (click)="onModalClosed()"
-                >
-                  Close
-                </button>
-              </div>
+      <shared-component-modal
+        [title]="'Modal Title'"
+        [size]="'medium'"
+        [showFooter]="true"
+        [isOpen]="modalIsOpen()"
+        (closed)="onModalClosed()"
+      >
+        <p>This is the content of the modal.</p>
+        <div footer>
+          <div class="w-100 flex flex-row flex-content-between">
+            <div><button class="button button--primary">Botón</button></div>
+            <div>
+              <button
+                class="button button--secondary"
+                (click)="onModalClosed()"
+              >
+                Close
+              </button>
             </div>
           </div>
-        </shared-component-modal>
-      </div>
-    </shared-ui-card>
-  </div>
+        </div>
+      </shared-component-modal>
+    </div>
+  </shared-ui-card>
+</div>
