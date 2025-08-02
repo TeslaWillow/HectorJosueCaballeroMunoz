@@ -57,8 +57,12 @@
 .flex-column { flex-direction: column; }
 .flex-row { flex-direction: row; }
 .flex-wrap { flex-wrap: wrap; }
-.flex-start { justify-content: flex-start; align-items: flex-start; }
-.flex-end { justify-content: flex-end; align-items: flex-end; }
-.flex-center { justify-content: center; align-items: center; }
-.flex-between { justify-content: space-between; align-items: center; }
-.flex-around { justify-content: space-around; align-items: center; }
+.flex-content-start { justify-content: flex-start; }
+.flex-content-end { justify-content: flex-end; }
+.flex-content-center { justify-content: center; }
+.flex-content-between { justify-content: space-between; }
+.flex-content-around { justify-content: space-around; }
+
+// Width and height utilities
+.w-100 { width: 100%; }
+.h-100 { height: 100%; }

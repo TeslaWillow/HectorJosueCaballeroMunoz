@@ -69,5 +69,28 @@
       </table>
     </div>
 
+    <div class="mb-5">
+      <h3>MODAL</h3>
+      <hr>
+
+      <button class="button button--primary" (click)="openModal();">Open modal</button>
+
+      <ui-modal
+        [title]="'Modal Title'"
+        [size]="'medium'"
+        [showFooter]="true"
+        [isOpen]="modalIsOpen()"
+        (closed)="onModalClosed()"
+      >
+        <p>This is the content of the modal.</p>
+        <div footer>
+          <div class="w-100 flex flex-row flex-content-between">
+            <div><button class="button button--primary">Botón</button></div>
+            <div><button class="button button--secondary" (click)="onModalClosed();">Close</button></div>
+          </div>
+        </div>
+      </ui-modal>
+    </div>
+
   </div>
 </main>
