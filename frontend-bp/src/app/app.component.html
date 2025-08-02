@@ -6,8 +6,9 @@
     <div class="mb-5">
       <h3>BUTTONS</h3>
       <hr>
-      <button class="button button--primary">Button test</button>
-      <button class="button button--secondary ml-1" (click)="toggleTheme();">Toggle theme</button>
+      <shared-ui-button><span>Primary Button</span></shared-ui-button>
+      <shared-ui-button class="ml-1" [variant]="'secondary'"><span>Secondary Button</span></shared-ui-button>
+      <shared-ui-button class="ml-1" [variant]="'secondary'" (click)="toggleTheme();"><span>Secondary Button</span></shared-ui-button>
     </div>
 
     <div class="mb-5">

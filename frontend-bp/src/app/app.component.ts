@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ModalComponent } from './shared/components/modal/modal.component';
+import { ButtonComponent } from './shared/ui/button/button.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ModalComponent],
+  imports: [ModalComponent, ButtonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
