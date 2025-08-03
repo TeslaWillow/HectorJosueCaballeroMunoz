@@ -1,17 +1,10 @@
 import { Routes } from '@angular/router';
+import { productsRoutes } from './modules/products/products.routes';
 
 export const routes: Routes = [
   {
     path: 'productos',
-    loadComponent: () => import('./products/pages/list-of-products/list-of-products.component'),
-  },
-  {
-    path: 'productos/editor',
-    loadComponent: () => import('./products/pages/editor-of-products/editor-of-products.component'),
-  },
-  {
-    path: 'productos/editor/:id',
-    loadComponent: () => import('./products/pages/editor-of-products/editor-of-products.component'),
+    children: productsRoutes,
   },
   {
     path: '**',
