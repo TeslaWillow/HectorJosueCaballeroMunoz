@@ -19,12 +19,12 @@ export class ApiService {
    * @param params Query parameters optionals
    * @return Observable<T>
    */
-  public get<T>(endpoint: string, params?: HttpParams): Observable<T> {
+  public get<T>(endpoint: string, params?: HttpParams, options?: { strict?: boolean }): Observable<T> {
     return this._http
       .get<ApiResponse<T>>(`${this._apiUrl}/${endpoint}`, { params })
       .pipe(
-        map((response) => response.data),
-        catchError(this.handleError)
+        map(response => this._normalizeResponse<T>(response, options?.strict)),
+        catchError(this._handleError)
       );
   }
 
@@ -35,19 +35,19 @@ export class ApiService {
    * @param headers Custom headers optionals
    * @returns Observable<T>
    */
-  public post<T>(endpoint: string, body: any, headers?: HttpHeaders): Observable<T> {
+  public post<T>(endpoint: string, body: any, headers?: HttpHeaders, options?: { strict?: boolean }): Observable<T> {
     return this._http
       .post<ApiResponse<T>>(`${this._apiUrl}/${endpoint}`, body, { headers })
       .pipe(
-        map((response) => response.data),
-        catchError(this.handleError)
+        map(response => this._normalizeResponse<T>(response, options?.strict)),
+        catchError(this._handleError)
       );
   }
 
   /**
    * Handles errors from API requests
    */
-  private handleError(error: any): Observable<never> {
+  private _handleError(error: any): Observable<never> {
     const apiError: ApiError = {
       status: error.status || 500,
       message: error.error?.message || 'Error desconocido',
@@ -55,6 +55,26 @@ export class ApiService {
     };
     console.error('API Error:', apiError);
     return throwError(() => apiError);
+  }
+
+  /**
+   * Normalizes the response to a specific type
+   * @param response The raw response from the API
+   * @param strict If true, expects the response to have a 'data' property
+   */
+  private _normalizeResponse<T>(response: any, strict = true): T {
+    // case 1: Response is a primitive type (string, number, etc.)
+    if (typeof response !== 'object') {
+      return response as T;
+    }
+
+    // case 2: Response is an object with a standard structure
+    if (strict && 'data' in response) {
+      return response.data as T;
+    }
+
+    // case 3: Response is an object without a 'data' property
+    return response as T;
   }
 
 }

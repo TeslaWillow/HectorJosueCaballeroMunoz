@@ -82,7 +82,7 @@
             type="submit"
             [variant]="'primary'"
             [disabled]="isLoading()"
-          >Enviar</shared-ui-button>
+          >{{ isProductAvailable() ? 'Actualizar' : 'Enviar'}}</shared-ui-button>
         </div>
       </div>
     </form>

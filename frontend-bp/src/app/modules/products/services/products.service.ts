@@ -72,6 +72,19 @@ export class ProductsService {
   }
 
   /**
+   * Fetches a product by its ID
+   * @param id - The ID of the product to fetch
+   * @returns Observable with the product
+   */
+  public getProductById(id: number): Observable<Product> {
+    if (!id) {
+      console.error('Product ID is required');
+      return of(null as unknown as Product);
+    }
+    return this._api.get<Product>(`${this._endpoint}/${id}`);
+  }
+
+  /**
    * Search if the product exists by ID
    * @param id - The ID of the product to check
    * @returns Observable that says if the product exists

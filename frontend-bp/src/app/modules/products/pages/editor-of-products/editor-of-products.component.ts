@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
 import { CardComponent } from '../../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { InputComponent } from '../../../../shared/components/input/input.component';
@@ -12,7 +12,7 @@ import { DateValidators } from '../../../../shared/validators/date.validator';
 import { ProductMapper } from '../../mappers/product.mapper';
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../interfaces/product.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'products-editor-of-products',
@@ -25,7 +25,7 @@ import { Router } from '@angular/router';
   templateUrl: './editor-of-products.component.html',
   styles: ``,
 })
-export default class EditorOfProductsComponent {
+export default class EditorOfProductsComponent implements OnDestroy {
   public readonly title = 'Editor de Productos';
   public readonly today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
   public readonly nextYear = new Date( new Date().setFullYear(new Date().getFullYear() + 1) ).toISOString().split('T')[0];
@@ -33,7 +33,9 @@ export default class EditorOfProductsComponent {
   private readonly _fb = inject(FormBuilder);
   private readonly _productService = inject(ProductsService);
   private readonly _router = inject(Router);
+  private readonly _activatedRoute = inject(ActivatedRoute);
 
+  private _product = signal<Product | null>(null);
   public productForm!: FormGroup;
   public isLoading = signal<boolean>(false);
 
@@ -47,21 +49,58 @@ export default class EditorOfProductsComponent {
     nextYearDate.setFullYear(nextYearDate.getFullYear() + 1);
     return nextYearDate.toISOString().split('T')[0];
   });
+  public isProductAvailable = computed<boolean>(() => {
+    return this._product !== null;
+  });
 
   constructor() {
     this._initializeForm();
+    this._getProductIdFromUrl(); // Use then / catch to handle other cases depending if the product exists
+  }
+
+  // Cleanup logic
+  ngOnDestroy(): void {
+    this._product.set(null);
+    this.isLoading.set(false);
+    this.resetForm();
+  }
+
+  private _getProductIdFromUrl(): Promise<void> {
+    const productId = Number(this._activatedRoute.snapshot.paramMap.get('id'));
+    if (!productId) { return Promise.resolve(); }
+    return new Promise((resolve, _) => {
+      if (productId) {
+        this._productService.getProductById(productId).subscribe({
+          next: (product: Product) => {
+            this._product.set(product);
+            const mappedProduct = ProductMapper.fromDomainToForm(this._product()!);
+            this.productForm.patchValue({
+              ...mappedProduct,
+              date_release: mappedProduct.date_release.toISOString()?.split('T')[0],
+              date_revision: mappedProduct.date_revision.toISOString()?.split('T')[0],
+            });
+            this.productForm.get('id')?.disable();
+            this.productForm.updateValueAndValidity();
+            resolve();
+          },
+          error: (error) => {
+            console.error('Error fetching product:', error);
+            resolve();
+          },
+        });
+      }
+    });
   }
 
   private _initializeForm(): void {
     this.productForm = this._fb.group({
-      id: [
-        '',
+      id: ['',
         [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(10),
           Validators.pattern('^[0-9]+$'),
-        ],
+        ]
       ],
       name: [
         '',
@@ -138,6 +177,24 @@ export default class EditorOfProductsComponent {
     });
   }
 
+  private _updateProduct(): void {
+    if(this.isLoading()) return;
+
+    this.isLoading.set(true);
+    const product: Product = ProductMapper.fromFormToDomain(this.productForm.value);
+    this._productService.updateProduct(product).subscribe({
+      next: (_: Product) => {
+        this.resetForm();
+        this._router.navigate(['/productos']);
+        this.isLoading.set(false);
+      },
+      error: (error) => {
+        console.error('Error updating product:', error);
+        this.isLoading.set(false);
+      },
+    });
+  }
+
   public isInvalid(controlName: string): boolean {
     const control = this.productForm.get(controlName);
     return control
@@ -151,12 +208,20 @@ export default class EditorOfProductsComponent {
       return;
     }
 
+    // If the product exists, update it
+    if(this.isProductAvailable()){
+      this._updateProduct();
+      return;
+    }
+
+    // If the product don't exists, save it
     this._saveProduct();
   }
 
   public resetForm(): void {
     this.productForm.reset();
     this.productForm.patchValue({
+      id: this.isProductAvailable() ? this._product()?.id : null,
       date_release: this.today,
       date_revision: this.nextYear,
     });
