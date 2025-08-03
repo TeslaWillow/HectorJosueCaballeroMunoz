@@ -32,6 +32,8 @@
       (blur)="handleBlur()"
       class="input"
       [class.input--invalid]="errorMessage()"
+      [attr.min]="min() ? min() : null"
+      [attr.max]="max() ? max() : null"
     />
   }
 

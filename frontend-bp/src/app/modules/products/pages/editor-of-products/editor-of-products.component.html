@@ -50,6 +50,7 @@
           <shared-component-input
             id="product_date_release"
             [label]="'Fecha de Liberación'"
+            [min]="today"
             type="date"
             formControlName="date_release"
             [errorMessage]="isInvalid('date_release') ? 'La fecha de liberación es requerida' : ''"
@@ -60,6 +61,7 @@
             id="product_date_revision"
             [label]="'Fecha de Revision'"
             [readonly]="true"
+            [min]="nextYear"
             type="date"
             formControlName="date_revision"
             [errorMessage]="isInvalid('date_revision') ? 'La fecha de revisión es requerida' : ''"

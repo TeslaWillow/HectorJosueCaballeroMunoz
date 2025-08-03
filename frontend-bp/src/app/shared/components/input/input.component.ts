@@ -35,14 +35,16 @@ export class InputComponent implements ControlValueAccessor, Validator {
   private _cdRef = inject(ChangeDetectorRef);
 
   // Inputs
-  public id = input<string>('');
-  public type = input<'text' | 'number' | 'email' | 'password' | 'date' | 'search' | 'textarea'>('text');
-  public placeholder = input<string>('');
-  public label = input<string>('');
-  public errorMessage = input<string>('');
-  public disabled = input<boolean, boolean>(false, { transform: booleanAttribute });
-  public readonly = input<boolean, boolean>(false, { transform: booleanAttribute });
-  public required = input<boolean, boolean>(false, { transform: booleanAttribute });
+  public readonly id = input<string>('');
+  public readonly type = input<'text' | 'number' | 'email' | 'password' | 'date' | 'search' | 'textarea'>('text');
+  public readonly placeholder = input<string>('');
+  public readonly label = input<string>('');
+  public readonly errorMessage = input<string>('');
+  public readonly disabled = input<boolean, boolean>(false, { transform: booleanAttribute });
+  public readonly readonly = input<boolean, boolean>(false, { transform: booleanAttribute });
+  public readonly required = input<boolean, boolean>(false, { transform: booleanAttribute });
+  public readonly min = input<number | string | null>(null);
+  public readonly max = input<number | string | null>(null);
 
   // MODEL (Two-way data binding w/ signals)
   public value = model<any>('');
