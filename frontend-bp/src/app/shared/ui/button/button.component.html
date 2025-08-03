@@ -2,7 +2,7 @@
   [type]="type()"
   [disabled]="disabled() || loading()"
   (click)="handleClick($event)"
-  class="button"
+  class="button text-bold"
   [class]="'button--' + (outline() ? 'outline-' : '') + variant()"
   [attr.aria-busy]="loading()"
 >

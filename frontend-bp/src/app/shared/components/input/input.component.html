@@ -1,6 +1,6 @@
 <div class="input-container" [class.invalid]="errorMessage()">
   @if (label()) {
-    <label [for]="id()" class="form-label">
+    <label [for]="id()" class="form-label" [class.text-muted]="disabled() || readonly()">
       {{ label() }}
       @if (required()) {
         <span class="required-asterisk text-danger">*</span>

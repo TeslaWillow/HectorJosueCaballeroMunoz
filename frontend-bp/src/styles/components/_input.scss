@@ -45,6 +45,16 @@ textarea {
       border-color: var(--primary-color);
       outline: none;
     }
+    // Read-only state
+    &:disabled,
+    &:read-only {
+      border: 2px solid lighten($color: $black-color, $amount: 75%);
+      background-color: #f5f5f5;
+      color: #a0a0a0;
+      cursor: not-allowed;
+      user-select: none;
+      pointer-events: none;
+    }
   }
 
   .icon {
