@@ -68,12 +68,57 @@ export class ProductsService {
    * @returns Observable with the list of products
    */
   public getProducts(): Observable<Product[]> {
-    return of(data);
     return this._api.get<Product[]>(`${this._endpoint}`);
   }
 
+  /**
+   * Search if the product exists by ID
+   * @param id - The ID of the product to check
+   * @returns Observable that says if the product exists
+   */
+  public checkIfProductsExists(id: number): Observable<Boolean> {
+    if (!id) {
+      console.error('Product ID is required for checking existence');
+      return of(false);
+    }
+
+    return this._api.get<Boolean>(`${this._endpoint}/verification/${id}`);
+  }
+
+  /**
+   * Creates a new product
+   * @param product - The product to create
+   * @returns Observable with the product
+   */
   public storeProduct(product: Product): Observable<Product> {
     return this._api.post<Product>(`${this._endpoint}`, product);
+  }
+
+  /**
+   * Updates an existing product
+   * @param product - The product to update
+   * @returns Observable with the updated product
+   */
+  public updateProduct(product: Product): Observable<Product> {
+    if (!product.id) {
+      console.error('Product ID is required for update');
+      return of(null as unknown as Product);
+    }
+
+    return this._api.post<Product>(`${this._endpoint}/${product.id}`, product);
+  }
+
+  /**
+   * Deletes a product by ID
+   * @param id - The ID of the product to delete
+   * @returns Observable that completes when the product is deleted
+   */
+  public deleteProduct(id: number): Observable<void> {
+    if (!id) {
+      console.error('Product ID is required for deletion');
+      return of();
+    }
+    return this._api.post<void>(`${this._endpoint}/${id}`, {});
   }
 
 }
