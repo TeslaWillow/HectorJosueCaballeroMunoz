@@ -32,4 +32,31 @@
       opacity: 0.9;
     }
   }
+  // Outline variants
+  &--outline-primary {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    &:hover {
+      background-color: var(--primary-color);
+      color: var(--text-color);
+    }
+    &:focus {
+      outline: 2px solid var(--primary-color);
+      outline-offset: 2px;
+    }
+  }
+  &--outline-secondary {
+    background-color: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+    &:hover {
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+    }
+    &:focus {
+      outline: 2px solid var(--secondary-color);
+      outline-offset: 2px;
+    }
+  }
 }

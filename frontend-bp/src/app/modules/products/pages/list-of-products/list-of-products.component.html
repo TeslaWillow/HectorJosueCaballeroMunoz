@@ -16,26 +16,48 @@
   <!-- ./Search and Add Button -->
 
   <shared-ui-card>
-    <shared-ui-table [data]="products()" [config]="tableConfig()">
-      <ng-template #actions let-row>
-        <shared-component-dropdown [buttonText]="'Opciones'">
-          <shared-component-dropdown-item
-            label="Ver"
-            icon="👁️"
-            (itemClick)="handleAction('view', row)"
-          ></shared-component-dropdown-item>
-          <shared-component-dropdown-item
-            label="Editar"
-            icon="✏️"
-            (itemClick)="handleAction('edit', row)"
-          ></shared-component-dropdown-item>
-          <shared-component-dropdown-item
-            label="Eliminar"
-            icon="🗑️"
-            (itemClick)="handleAction('delete', row)"
-          ></shared-component-dropdown-item>
+
+    <div class="row">
+      <div class="col-12">
+        <shared-ui-table [data]="visibleProducts()" [config]="tableConfig()">
+          <ng-template #actions let-row>
+            <shared-component-dropdown [buttonText]="'Opciones'">
+              <shared-component-dropdown-item
+                label="Ver"
+                icon="👁️"
+                (itemClick)="handleAction('view', row)"
+              ></shared-component-dropdown-item>
+              <shared-component-dropdown-item
+                label="Editar"
+                icon="✏️"
+                (itemClick)="handleAction('edit', row)"
+              ></shared-component-dropdown-item>
+              <shared-component-dropdown-item
+                label="Eliminar"
+                icon="🗑️"
+                (itemClick)="handleAction('delete', row)"
+              ></shared-component-dropdown-item>
+            </shared-component-dropdown>
+          </ng-template>
+        </shared-ui-table>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 text-left d-flex align-items-center">
+        <p class="text-bold">{{ products().length }} Productos</p>
+      </div>
+      <div class="col-md-6 text-right">
+        <shared-component-dropdown [buttonText]=" amountOfItems() + '' " [outline]="true">
+          @for (amount of listOfPosibleAmountOfItems(); track $index) {
+            <shared-component-dropdown-item
+              [label]="amount + ''"
+              (itemClick)="changeAmountOfItems(amount)"
+            ></shared-component-dropdown-item>
+          }
         </shared-component-dropdown>
-      </ng-template>
-    </shared-ui-table>
+      </div>
+    </div>
+
   </shared-ui-card>
 </div>

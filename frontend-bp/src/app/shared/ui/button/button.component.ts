@@ -9,6 +9,7 @@ import { Component, input, output } from '@angular/core';
 export class ButtonComponent {
   public readonly type     = input<'button' | 'submit' | 'reset'>('button');
   public readonly variant  = input<'primary' | 'secondary' | 'text'>('primary');
+  public readonly outline  = input<boolean>(false);
   public readonly disabled = input<boolean>(false);
   public readonly loading  = input<boolean>(false);
   public readonly click    = output<Event>();

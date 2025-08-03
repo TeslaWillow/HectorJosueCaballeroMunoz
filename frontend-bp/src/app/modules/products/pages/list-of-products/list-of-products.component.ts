@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { CardComponent } from '../../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { InputComponent } from '../../../../shared/components/input/input.component';
@@ -27,6 +27,8 @@ export default class ListOfProductsComponent implements OnInit {
 
   public readonly title = 'Lista de Productos';
   public products = signal<Product[]>([]);
+  public amountOfItems = signal<number>(5);
+  public listOfPosibleAmountOfItems = signal<number[]>([5, 10, 15, 20]);
   public tableConfig = signal<TableConfig>({
     columns: [
       { key: 'name', label: 'Nombre' },
@@ -37,6 +39,10 @@ export default class ListOfProductsComponent implements OnInit {
     striped: false,
     hoverable: false,
   });
+
+  public readonly visibleProducts = computed(() =>
+    this.products().slice(0, this.amountOfItems())
+  );
 
   ngOnInit(): void {
     this._getProducts();
@@ -64,5 +70,9 @@ export default class ListOfProductsComponent implements OnInit {
       default:
         console.warn('Unknown action:', action);
     }
+  }
+
+  public changeAmountOfItems(amount: number): void {
+    this.amountOfItems.set(amount);
   }
 }
