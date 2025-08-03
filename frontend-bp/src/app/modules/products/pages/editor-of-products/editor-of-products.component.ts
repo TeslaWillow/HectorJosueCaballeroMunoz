@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CardComponent } from '../../../../shared/ui/card/card.component';
 import { ButtonComponent } from '../../../../shared/ui/button/button.component';
 import { InputComponent } from '../../../../shared/components/input/input.component';
@@ -10,6 +10,9 @@ import {
 } from '@angular/forms';
 import { DateValidators } from '../../../../shared/validators/date.validator';
 import { ProductMapper } from '../../mappers/product.mapper';
+import { ProductsService } from '../../services/products.service';
+import { Product } from '../../interfaces/product.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'products-editor-of-products',
@@ -28,8 +31,13 @@ export default class EditorOfProductsComponent {
   public readonly nextYear = new Date( new Date().setFullYear(new Date().getFullYear() + 1) ).toISOString().split('T')[0];
 
   private _fb = inject(FormBuilder);
+  private _productService = inject(ProductsService);
+  private _router = inject(Router);
 
   public productForm!: FormGroup;
+  public isLoading = signal<boolean>(false);
+
+  // COMPUTED PROPERTIES
   public nextYearOfDateRevision = computed<string>(() => {
     const dateRevision = this.productForm.get('date_revision')?.value;
 
@@ -112,6 +120,24 @@ export default class EditorOfProductsComponent {
     dateRevisionControl.updateValueAndValidity();
   }
 
+  private _saveProduct(): void {
+    if(this.isLoading()) return;
+
+    this.isLoading.set(true);
+    const product: Product = ProductMapper.fromFormToDomain(this.productForm.value);
+    this._productService.storeProduct(product).subscribe({
+      next: (_: Product) => {
+        this.resetForm();
+        this._router.navigate(['/productos']);
+        this.isLoading.set(false);
+      },
+      error: (error) => {
+        console.error('Error saving product:', error);
+        this.isLoading.set(false);
+      },
+    });
+  }
+
   public isInvalid(controlName: string): boolean {
     const control = this.productForm.get(controlName);
     return control
@@ -125,8 +151,7 @@ export default class EditorOfProductsComponent {
       return;
     }
 
-    const product = ProductMapper.fromFormToDomain(this.productForm.value);
-    console.log('Product submitted:', product);
+    this._saveProduct();
   }
 
   public resetForm(): void {

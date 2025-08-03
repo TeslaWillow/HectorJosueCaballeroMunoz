@@ -74,12 +74,14 @@
             class="mx-3"
             type="button"
             [variant]="'secondary'"
+            [disabled]="isLoading()"
             (click)="resetForm()"
           >Reiniciar</shared-ui-button>
           <shared-ui-button
             class="mx-3"
             type="submit"
             [variant]="'primary'"
+            [disabled]="isLoading()"
           >Enviar</shared-ui-button>
         </div>
       </div>

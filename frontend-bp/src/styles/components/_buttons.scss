@@ -59,4 +59,15 @@
       outline-offset: 2px;
     }
   }
+  // Disabled state
+  &:disabled,
+  &.button--disabled {
+    background-color: #e0e0e0 !important;
+    color: #a0a0a0 !important;
+    border-color: #e0e0e0 !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    opacity: 0.7;
+    box-shadow: none;
+  }
 }
