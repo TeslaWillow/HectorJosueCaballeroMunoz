@@ -2,14 +2,20 @@
   <!-- Search and Add Button -->
   <div class="row">
     <div class="col-sm-12 col-md-3">
-      <shared-component-input
-        type="search"
-        placeholder="Search..."
-      ></shared-component-input>
+      <div [formGroup]="searchForm">
+        <shared-component-input
+          type="search"
+          formControlName="search"
+          placeholder="Search..."
+        ></shared-component-input>
+      </div>
     </div>
     <div class="col-sm-12 col-md-9">
       <div class="text-right">
-        <shared-ui-button [variant]="'primary'"> Agregar </shared-ui-button>
+        <shared-ui-button
+          [variant]="'primary'"
+          [routerLink]="['editor']"
+        > Agregar </shared-ui-button>
       </div>
     </div>
   </div>
@@ -45,7 +51,7 @@
 
     <div class="row">
       <div class="col-md-6 text-left d-flex align-items-center">
-        <p class="text-bold">{{ products().length }} Productos</p>
+        <p class="text-bold">{{ products().length }} Resultados</p>
       </div>
       <div class="col-md-6 text-right">
         <shared-component-dropdown [buttonText]=" amountOfItems() + '' " [outline]="true">
