@@ -1,6 +1,6 @@
 import {
   Component, forwardRef, booleanAttribute,
-  ChangeDetectorRef, inject, input, model
+  ChangeDetectorRef, inject, input, model, signal
 } from '@angular/core';
 import {
   NG_VALUE_ACCESSOR, NG_VALIDATORS,
@@ -10,13 +10,12 @@ import {
 import { CommonModule } from '@angular/common';
 
 // Constants for ControlValueAccessor and Validator
-// These constants are used to provide the component as a value accessor and validator in Angular forms
 const INPUT_VALUE_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => InputComponent),
   multi: true
 };
-// Validator for the input component
+
 const INPUT_VALIDATOR = {
   provide: NG_VALIDATORS,
   useExisting: forwardRef(() => InputComponent),
@@ -46,10 +45,18 @@ export class InputComponent implements ControlValueAccessor, Validator {
   public readonly min = input<number | string | null>(null);
   public readonly max = input<number | string | null>(null);
 
+  // disabled form
+  private _isDisabledByForm = signal<boolean>(false);
+
   // MODEL (Two-way data binding w/ signals)
   public value = model<any>('');
 
-  // CONTROL VALUE ACCESSOR IMPLEMENTATION (Reactive Forms)
+  // computed disabled
+  public get isDisabled(): boolean {
+    return this.disabled() || this._isDisabledByForm();
+  }
+
+  // CONTROL VALUE ACCESSOR IMPLEMENTATION
   public onChange: (value: any) => void = (() => {});
   public onTouched: () => void = (() => {});
 
@@ -66,6 +73,12 @@ export class InputComponent implements ControlValueAccessor, Validator {
     this.onTouched = fn;
   }
 
+  // Disabled state
+  public setDisabledState(isDisabled: boolean): void {
+    this._isDisabledByForm.set(isDisabled);
+    this._cdRef.markForCheck();
+  }
+
   // VALIDATION
   public validate(control: AbstractControl): ValidationErrors | null {
     if (this.required() && !control.value) {
@@ -76,6 +89,8 @@ export class InputComponent implements ControlValueAccessor, Validator {
 
   // HANDLERS
   public handleInput(event: Event): void {
+    if (this.isDisabled) return; // prevent input
+
     const value = (event.target as HTMLInputElement).value;
     this.value.set(value);
     this.onChange(value);
@@ -83,7 +98,7 @@ export class InputComponent implements ControlValueAccessor, Validator {
   }
 
   public handleBlur(): void {
+    if (this.isDisabled) return; // prevent blur
     this.onTouched();
   }
-
 }

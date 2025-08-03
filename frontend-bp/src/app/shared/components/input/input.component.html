@@ -1,6 +1,6 @@
 <div class="input-container" [class.invalid]="errorMessage()">
   @if (label()) {
-    <label [for]="id()" class="form-label" [class.text-muted]="disabled() || readonly()">
+    <label [for]="id()" class="form-label" [class.text-muted]="isDisabled || readonly()">
       {{ label() }}
       @if (required()) {
         <span class="required-asterisk text-danger">*</span>
@@ -12,7 +12,7 @@
     <textarea
       [id]="id()"
       [placeholder]="placeholder()"
-      [disabled]="disabled()"
+      [disabled]="isDisabled"
       [readonly]="readonly()"
       [value]="value()"
       (input)="handleInput($event)"
@@ -25,7 +25,7 @@
       [id]="id()"
       [type]="type()"
       [placeholder]="placeholder()"
-      [disabled]="disabled()"
+      [disabled]="isDisabled"
       [readonly]="readonly()"
       [value]="value()"
       (input)="handleInput($event)"
