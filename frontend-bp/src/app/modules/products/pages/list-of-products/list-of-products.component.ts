@@ -10,7 +10,7 @@ import { DropdownItemComponent } from '../../../../shared/components/dropdown-it
 import { TableConfig } from '../../../../shared/ui/table/table.interface';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'products-list-of-products',
@@ -30,6 +30,7 @@ import { RouterModule } from '@angular/router';
 export default class ListOfProductsComponent implements OnInit {
   private readonly _productService = inject(ProductsService);
   private readonly _fb = inject(FormBuilder);
+  private readonly _router = inject(Router);
   public searchForm: FormGroup = this._fb.group({ search: [''] });
 
   public readonly title = 'Lista de Productos';
@@ -93,9 +94,11 @@ export default class ListOfProductsComponent implements OnInit {
   public handleAction(action: string, product: Product): void {
     switch (action) {
       case 'edit':
-        console.log('Edit product:', product);
+        if (!product.id) return;
+        this._router.navigate(['/productos/editor', product.id]);
         break;
       case 'delete':
+        if (!product.id) return;
         console.log('Delete product:', product);
         break;
       default:

@@ -30,9 +30,9 @@ export default class EditorOfProductsComponent {
   public readonly today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
   public readonly nextYear = new Date( new Date().setFullYear(new Date().getFullYear() + 1) ).toISOString().split('T')[0];
 
-  private _fb = inject(FormBuilder);
-  private _productService = inject(ProductsService);
-  private _router = inject(Router);
+  private readonly _fb = inject(FormBuilder);
+  private readonly _productService = inject(ProductsService);
+  private readonly _router = inject(Router);
 
   public productForm!: FormGroup;
   public isLoading = signal<boolean>(false);

@@ -29,11 +29,6 @@
           <ng-template #actions let-row>
             <shared-component-dropdown [buttonText]="'Opciones'">
               <shared-component-dropdown-item
-                label="Ver"
-                icon="👁️"
-                (itemClick)="handleAction('view', row)"
-              ></shared-component-dropdown-item>
-              <shared-component-dropdown-item
                 label="Editar"
                 icon="✏️"
                 (itemClick)="handleAction('edit', row)"
