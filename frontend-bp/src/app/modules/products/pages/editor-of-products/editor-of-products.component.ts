@@ -8,6 +8,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { DateValidators } from '../../../../shared/validators/date.validator';
+import { ProductMapper } from '../../mappers/product.mapper';
 
 @Component({
   selector: 'products-editor-of-products',
@@ -70,37 +72,24 @@ export default class EditorOfProductsComponent {
         ],
       ],
       logo: ['', [Validators.required]],
-      date_release: [this.today, [Validators.required]],
-      date_revision: [this.nextYear, [Validators.required]],
+      date_release: [this.today, [
+        Validators.required,
+        DateValidators.minDate(new Date(this.today)), // Ensure date_release is not in the past
+      ]],
+      date_revision: [this.nextYear, [
+        Validators.required,
+        DateValidators.minDate(new Date(this.nextYear)), // Ensure date_revision is at least one year after date_release
+      ]],
     });
 
     this._registerFormChanges();
   }
 
   private _registerFormChanges(): void {
-    // Prevent past dates for date_release
-    this.productForm.get('date_release')?.valueChanges.subscribe(() => {
-      this._dontAllowPastReleaseDate();
-    });
-
     // Set the next year to date_revision when the form is initialized
     this.productForm.get('date_release')?.valueChanges.subscribe(() => {
       this._setNextYearToDateRevision();
     });
-  }
-
-  private _dontAllowPastReleaseDate(): void {
-    const dateReleaseControl = this.productForm.get('date_release');
-    if (!dateReleaseControl) return;
-
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const dateRelease = new Date(dateReleaseControl.value);
-    dateRelease.setHours(0, 0, 0, 0);
-
-    if (dateRelease >= today) return;
-    dateReleaseControl.setValue(today.toISOString().split('T')[0]);
   }
 
   private _setNextYearToDateRevision(): void {
@@ -109,9 +98,18 @@ export default class EditorOfProductsComponent {
 
     if (!dateRevisionControl || !dateReleaseControl) return;
 
-    const currentDate = new Date(dateReleaseControl.value);
-    currentDate.setFullYear(currentDate.getFullYear() + 1);
-    dateRevisionControl.setValue(currentDate.toISOString().split('T')[0]);
+    const dateRelease = new Date(dateReleaseControl.value);
+    const nextYearDate = new Date(dateRelease);
+    nextYearDate.setFullYear(nextYearDate.getFullYear() + 1);
+
+    dateRevisionControl.setValue(nextYearDate.toISOString().split('T')[0]);
+
+    // Update the minDate validator for date_revision
+    dateRevisionControl.setValidators([
+      Validators.required,
+      DateValidators.minDate(nextYearDate),
+    ]);
+    dateRevisionControl.updateValueAndValidity();
   }
 
   public isInvalid(controlName: string): boolean {
@@ -119,6 +117,16 @@ export default class EditorOfProductsComponent {
     return control
       ? control.invalid && (control.dirty || control.touched)
       : false;
+  }
+
+  public onSubmit(): void {
+    if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
+      return;
+    }
+
+    const product = ProductMapper.fromFormToDomain(this.productForm.value);
+    console.log('Product submitted:', product);
   }
 
   public resetForm(): void {
