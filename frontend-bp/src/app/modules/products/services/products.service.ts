@@ -118,7 +118,7 @@ export class ProductsService {
       return of(null as unknown as Product);
     }
 
-    return this._api.post<Product>(`${this._endpoint}/${product.id}`, product);
+    return this._api.put<Product>(`${this._endpoint}/${product.id}`, product);
   }
 
   /**

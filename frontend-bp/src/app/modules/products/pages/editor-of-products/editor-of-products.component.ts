@@ -72,13 +72,13 @@ export default class EditorOfProductsComponent implements OnDestroy {
       if (productId) {
         this._productService.getProductById(productId).subscribe({
           next: (product: Product) => {
-            this._product.set(product);
-            const mappedProduct = ProductMapper.fromDomainToForm(this._product()!);
+            const mappedProduct = ProductMapper.fromDomainToForm(product);
             this.productForm.patchValue({
               ...mappedProduct,
               date_release: mappedProduct.date_release.toISOString()?.split('T')[0],
               date_revision: mappedProduct.date_revision.toISOString()?.split('T')[0],
-            });
+            }); // Patch values
+            this._product.set(mappedProduct); // Fill variable
             this.productForm.get('id')?.disable();
             this.productForm.updateValueAndValidity();
             resolve();
@@ -181,7 +181,7 @@ export default class EditorOfProductsComponent implements OnDestroy {
     if(this.isLoading()) return;
 
     this.isLoading.set(true);
-    const product: Product = ProductMapper.fromFormToDomain(this.productForm.value);
+    const product: Product = ProductMapper.fromFormToDomain(this.productForm.getRawValue()); // Get all values (Even disabled ones)
     this._productService.updateProduct(product).subscribe({
       next: (_: Product) => {
         this.resetForm();

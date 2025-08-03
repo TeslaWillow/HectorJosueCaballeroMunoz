@@ -44,6 +44,22 @@ export class ApiService {
       );
   }
 
+      /**
+   * Generic method for PUT requests
+   * @param endpoint Ex: 'bp/products'
+   * @param body Body of request
+   * @param headers Custom headers optionals
+   * @returns Observable<T>
+   */
+  public put<T>(endpoint: string, body: any, headers?: HttpHeaders, options?: { strict?: boolean }): Observable<T> {
+    return this._http
+      .put<ApiResponse<T>>(`${this._apiUrl}/${endpoint}`, body, { headers })
+      .pipe(
+        map(response => this._normalizeResponse<T>(response, options?.strict)),
+        catchError(this._handleError)
+      );
+  }
+
   /**
    * Handles errors from API requests
    */
