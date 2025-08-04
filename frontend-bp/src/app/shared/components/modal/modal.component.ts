@@ -1,4 +1,4 @@
-import { Component, HostListener, input, output, EventEmitter } from '@angular/core';
+import { Component, HostListener, input, output } from '@angular/core';
 
 @Component({
   selector: 'shared-component-modal',
