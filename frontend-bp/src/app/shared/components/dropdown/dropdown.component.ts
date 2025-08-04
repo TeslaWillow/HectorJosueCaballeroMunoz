@@ -1,11 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output, signal } from '@angular/core';
 import { ButtonComponent } from '../../ui/button/button.component';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'shared-component-dropdown',
   standalone: true,
-  imports: [CommonModule, ButtonComponent],
+  imports: [
+    CommonModule,
+    ButtonComponent,
+    FontAwesomeModule
+  ],
   templateUrl: './dropdown.component.html',
   styles: ``
 })
@@ -16,6 +22,7 @@ export class DropdownComponent {
   public readonly outline = input<boolean>(false);
   // Events (father dropdown)
   public onItemSelected = output<string>();
+  public readonly faEllipsisVertical = faEllipsisVertical;
   // Variables
   public readonly isDropdownOpen = signal(false);
 

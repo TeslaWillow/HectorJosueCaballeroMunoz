@@ -6,7 +6,9 @@
     class="dropdown-button"
   >
     {{ buttonText() }}
-    <span class="dropdown-icon">▼</span>
+    <span class="dropdown-icon">
+      <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+    </span>
   </shared-ui-button>
 
   @if (isDropdownOpen()) {
