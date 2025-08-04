@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, input, output, EventEmitter, inject } from '@angular/core';
+import { Component, HostListener, input, output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'shared-component-modal',
@@ -16,8 +16,6 @@ export class ModalComponent {
 
   // Outputs
   public readonly closed = output<void>();
-
-  private readonly _elRef = inject(ElementRef);
 
   close(): void {
     this.closed.emit();
