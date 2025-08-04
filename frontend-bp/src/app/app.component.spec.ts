@@ -3,14 +3,18 @@ import { AppComponent } from "./app.component";
 
 describe('Test on AppComponent', () => {
 
+   let component: AppComponent;
+
+  beforeEach(() => {
+    component = new AppComponent();
+  });
+
   it('should create the app', () => {
-    const app = new AppComponent();
-    expect(app).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it(`should have as title 'frontend-bp'`, () => {
-    const app = new AppComponent();
-    expect(app.title).toEqual('frontend-bp');
+    expect(component.title).toEqual('frontend-bp');
   });
 
   it('should render a router-outlet', () => {

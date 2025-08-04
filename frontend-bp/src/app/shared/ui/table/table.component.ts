@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ContentChild, contentChild, input, output, signal } from '@angular/core';
+import { Component, ContentChild, input, output, signal } from '@angular/core';
 import { TableConfig, TableColumn } from './table.interface';
 
 @Component({
