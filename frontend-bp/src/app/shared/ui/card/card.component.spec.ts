@@ -16,4 +16,15 @@ describe('CardComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should have hoverable input set to false by default', () => {
+    expect(component.hoverable()).toBe(false);
+  });
+
+  it('should have card class', () => {
+    const fixture = TestBed.createComponent(CardComponent);
+    fixture.detectChanges();
+    const card = fixture.nativeElement.querySelector('.card');
+    expect(card).not.toBeNull();
+  });
+
 });
