@@ -1,0 +1,20 @@
+.product-header {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.product-header__icon {
+  font-size: 2rem;
+  margin-right: 0.75rem;
+}
+
+.product-header__title {
+  color: #364976;
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
