@@ -12,7 +12,7 @@ import { ButtonComponent } from '../../ui/button/button.component';
 export class DropdownComponent {
   // Inputs
   public readonly buttonText = input<String>('Acciones');
-  public readonly buttonVariant = input<'primary' | 'secondary'>('secondary');
+  public readonly buttonVariant = input<'primary' | 'secondary' | 'ghost'>('secondary');
   public readonly outline = input<boolean>(false);
   // Events (father dropdown)
   public onItemSelected = output<string>();

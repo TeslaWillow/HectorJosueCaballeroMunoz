@@ -59,6 +59,21 @@
       outline-offset: 2px;
     }
   }
+  // Ghost variant
+  &--ghost {
+    background: transparent;
+    color: var(--text-color);
+    border: none;
+    box-shadow: none;
+    &:hover {
+      background: #f3f4f6;
+      color: var(--primary-color);
+    }
+    &:focus {
+      background: #f3f4f6;
+      outline: none;
+    }
+  }
   // Disabled state
   &:disabled,
   &.button--disabled {
