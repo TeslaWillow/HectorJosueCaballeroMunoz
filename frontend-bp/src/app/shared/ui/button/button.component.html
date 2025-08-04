@@ -3,7 +3,7 @@
   [disabled]="disabled() || loading()"
   (click)="handleClick($event)"
   class="button text-bold"
-  [class]="'button--' + (outline() ? 'outline-' : '') + variant()"
+  [class]="'button--' + (outline() ? 'outline-' : '') + variant() + (block() ? ' button--block' : '')"
   [attr.aria-busy]="loading()"
 >
   @if (loading()) {

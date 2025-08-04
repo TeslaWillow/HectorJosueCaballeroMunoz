@@ -12,6 +12,7 @@ export class ButtonComponent {
   public readonly outline  = input<boolean>(false);
   public readonly disabled = input<boolean>(false);
   public readonly loading  = input<boolean>(false);
+  public readonly block    = input<boolean>(false);
   public readonly click    = output<Event>();
 
   public handleClick(event: Event): void {

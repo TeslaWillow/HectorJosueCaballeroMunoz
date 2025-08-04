@@ -70,4 +70,9 @@
     opacity: 0.7;
     box-shadow: none;
   }
+  // Block variant
+  &--block {
+    display: block;
+    width: 100%;
+  }
 }
