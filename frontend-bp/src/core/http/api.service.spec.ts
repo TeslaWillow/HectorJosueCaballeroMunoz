@@ -82,6 +82,8 @@ describe('ApiService', () => {
   });
 
   it('should handle error and throw ApiError', done => {
+    // Suppress error log in test output
+    jest.spyOn(console, 'error').mockImplementation(() => {});
     httpClientMock.get.mockReturnValue(throwError(() => ({ status: 404, error: { message: 'Not found' } })));
     service.get('products').subscribe({
       error: err => {
