@@ -7,7 +7,11 @@
   >
     {{ buttonText() }}
     <span class="dropdown-icon">
-      <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+      @if (icon()) {
+        <fa-icon [icon]="icon()!"></fa-icon>
+      } @else {
+        <span class="default-icon">▼</span>
+      }
     </span>
   </shared-ui-button>
 

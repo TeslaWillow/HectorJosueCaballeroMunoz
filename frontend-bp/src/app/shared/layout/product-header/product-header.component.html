@@ -1,6 +1,10 @@
 <header class="product-header">
-  <span class="product-header__icon">
-    <fa-icon [icon]="faMoneyBill"></fa-icon>
-  </span>
-  <span class="product-header__title">Banco</span>
+  <div (click)="redirectToProductos()" style="cursor: pointer;">
+    <span class="product-header__icon">
+      <fa-icon [icon]="faMoneyBill"></fa-icon>
+    </span>
+    <span class="product-header__title">
+      Banco
+    </span>
+  </div>
 </header>

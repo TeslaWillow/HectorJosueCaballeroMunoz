@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Router, RouterModule } from '@angular/router';
 import { ModalComponent } from '../../../../shared/components/modal/modal.component';
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'products-list-of-products',
@@ -54,6 +55,7 @@ export default class ListOfProductsComponent implements OnInit, OnDestroy {
   });
   public readonly searchTerm = signal('');
   public readonly debouncedSearchTerm = signal('');
+  public readonly faEllipsisVertical = faEllipsisVertical;
   // COMPUTED
   public readonly visibleProducts = computed(() => {
     const search = this.debouncedSearchTerm().toLowerCase().trim();

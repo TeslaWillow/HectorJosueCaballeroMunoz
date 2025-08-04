@@ -25,7 +25,11 @@
       <div class="col-12">
         <shared-ui-table [data]="visibleProducts()" [config]="tableConfig()">
           <ng-template #actions let-row>
-            <shared-component-dropdown [buttonText]="''" [buttonVariant]="'ghost'">
+            <shared-component-dropdown
+              [buttonText]="''"
+              [buttonVariant]="'ghost'"
+              [icon]="faEllipsisVertical"
+            >
               <shared-component-dropdown-item
                 label="Editar"
                 icon="✏️"
