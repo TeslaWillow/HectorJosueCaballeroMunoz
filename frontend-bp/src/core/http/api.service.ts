@@ -61,6 +61,21 @@ export class ApiService {
   }
 
   /**
+   * Generic method for DELETE requests
+   * @param endpoint Ex: 'bp/products/1'
+   * @param headers Custom headers optionals
+   * @returns Observable<T>
+   */
+  public delete<T>(endpoint: string, headers?: HttpHeaders, options?: { strict?: boolean }): Observable<T> {
+    return this._http
+      .delete<ApiResponse<T>>(`${this._apiUrl}/${endpoint}`, { headers })
+      .pipe(
+        map(response => this._normalizeResponse<T>(response, options?.strict)),
+        catchError(this._handleError)
+      );
+  }
+
+  /**
    * Handles errors from API requests
    */
   private _handleError(error: any): Observable<never> {

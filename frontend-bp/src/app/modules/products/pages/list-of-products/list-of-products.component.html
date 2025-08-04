@@ -62,3 +62,29 @@
 
   </shared-ui-card>
 </div>
+
+<shared-component-modal
+  [size]="'medium'"
+  [showFooter]="true"
+  [isOpen]="modalIsOpen()"
+  [closeOnOverlayClick]="!isDeletingProduct()"
+  (closed)="closeModal()"
+>
+  <p>¿Estas seguro de eliminar el producto <b>{{ selectedProduct()?.name }}</b>?</p>
+  <div footer>
+    <div class="w-100 flex flex-row flex-content-between">
+        <shared-ui-button
+          [variant]="'secondary'"
+          [disabled]="isDeletingProduct()"
+          (click)="modalIsOpen.set(false)"
+        > Cancelar </shared-ui-button>
+      <div>
+        <shared-ui-button
+          [variant]="'primary'"
+          [disabled]="isDeletingProduct()"
+          (click)="deleteProduct()"
+        > Aceptar </shared-ui-button>
+      </div>
+    </div>
+  </div>
+</shared-component-modal>

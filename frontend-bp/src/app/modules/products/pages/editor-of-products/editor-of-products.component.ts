@@ -40,17 +40,8 @@ export default class EditorOfProductsComponent implements OnDestroy {
   public isLoading = signal<boolean>(false);
 
   // COMPUTED PROPERTIES
-  public nextYearOfDateRevision = computed<string>(() => {
-    const dateRevision = this.productForm.get('date_revision')?.value;
-
-    if (!dateRevision) return '';
-
-    const nextYearDate = new Date(dateRevision);
-    nextYearDate.setFullYear(nextYearDate.getFullYear() + 1);
-    return nextYearDate.toISOString().split('T')[0];
-  });
   public isProductAvailable = computed<boolean>(() => {
-    return this._product !== null;
+    return this._product() !== null && this._product()?.id !== undefined;
   });
 
   constructor() {
