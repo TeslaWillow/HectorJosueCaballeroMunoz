@@ -26,13 +26,9 @@ Este repositorio contiene dos proyectos independientes:
    ```sh
    npm install
    ```
-3. Inicia el servidor Node.js:
+3. Start the Node.js server:
    ```sh
-   npm start
-   ```
-   O para desarrollo con recarga automática (si tienes nodemon):
-   ```sh
-   npm run dev
+   npm run start:dev
    ```
 4. El backend estará disponible en [http://localhost:3000](http://localhost:3002) (o el puerto configurado)
 
@@ -109,11 +105,7 @@ This repository contains two independent projects:
    ```
 3. Start the Node.js server:
    ```sh
-   npm start
-   ```
-   Or for development with auto-reload (if you have nodemon):
-   ```sh
-   npm run dev
+   npm run start:dev
    ```
 4. The backend will be available at [http://localhost:3000](http://localhost:3002) (or the configured port)
 
