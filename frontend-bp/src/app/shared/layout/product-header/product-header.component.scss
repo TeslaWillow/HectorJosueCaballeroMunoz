@@ -1,5 +1,5 @@
 .product-header {
-  background: #fff;
+  background: var(--card-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,14 +7,21 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.03);
 }
 
+#product-header-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .product-header__icon {
-  color: #3b56b1;
+  color: var(--header-color);
   font-size: 2rem;
   margin-right: 0.75rem;
 }
 
 .product-header__title {
-  color: #3b56b1;
+  color: var(--header-color);
   font-size: 2rem;
   font-weight: bold;
   letter-spacing: 0.05em;
